@@ -1,6 +1,8 @@
 name: CI
 
-on: [pull_request]
+on:
+  pull_request:
+    branches: [staging]
 
 jobs:
   lint:
@@ -10,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
       - run: npm ci
       - run: npm run lint
 
@@ -21,9 +23,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
       - run: npm ci
-      - run: npm run type-check
+      - run: npm run typecheck
 
   test:
     runs-on: ubuntu-latest
@@ -32,7 +34,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
       - run: npm ci
       - run: npm test --if-present
 
@@ -44,6 +46,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
       - run: npm ci
       - run: npm run build

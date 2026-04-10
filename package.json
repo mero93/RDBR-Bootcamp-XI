@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "prepare": "husky install",
-    "type-check": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "test": "echo 'No tests yet'"
   },
   "dependencies": {

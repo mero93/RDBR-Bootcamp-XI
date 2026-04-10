@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -6,6 +6,45 @@
 }
 
 @theme inline {
+  --color-greyscale-50: #ffffff;
+  --color-greyscale-100: #f5f5f5;
+  --color-greyscale-200: #d1d1d1;
+  --color-greyscale-300: #adadad;
+  --color-greyscale-400: #8a8a8a;
+  --color-greyscale-500: #666666;
+  --color-greyscale-600: #525252;
+  --color-greyscale-700: #3d3d3d;
+  --color-greyscale-800: #292929;
+  --color-greyscale-900: #141414;
+  --color-greyscale-950: #0a0a0a;
+
+  --color-purple-50: #eeedfc;
+  --color-purple-100: #dddbfa;
+  --color-purple-200: #b7b3f4;
+  --color-purple-300: #958fef;
+  --color-purple-400: #736bea;
+  --color-purple-500: #4f46e5;
+  --color-purple-600: #281ed2;
+  --color-purple-700: #1e169d;
+  --color-purple-800: #130e67;
+  --color-purple-900: #0a0836;
+  --color-purple-950: #05041b;
+
+  --color-primary: var(--color-purple-500);
+  --color-primary-hover: var(--color-purple-600);
+  --color-primary-focus: var(--color-primary-hover);
+  --color-primary-active: var(--color-purple-700);
+  --color-primary-disabled: var(--color-greyscale-300);
+  --color-primary-foreground: var(--color-greyscale-50);
+
+  --color-error: #f4161a;
+  --color-error-light: #f66466;
+  --color-warning: #f4a316;
+  --color-success: #1dc31d;
+  --color-success-light: color-mix(in srgb, var(--color-success) 10%, transparent);
+
+  --color-on-disabled: var(--color-greyscale-400);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);

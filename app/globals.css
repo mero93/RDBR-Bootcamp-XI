@@ -45,6 +45,30 @@
 
   --color-on-disabled: var(--color-greyscale-400);
 
+  --font-size-display-xl: 3rem; /* 48px */
+
+  --font-size-h1: 2.5rem; /* 40px */
+  --font-size-h2: 2rem; /* 32px */
+  --font-size-h3: 1.5rem; /* 24px */
+  --font-size-h4: 1.25rem; /* 20px */
+  --font-size-h5: 1rem; /* 16px */
+
+  --font-size-body-xl: 1.5rem; /* 24px */
+  --font-size-body-l: 1.25rem; /* 20px */
+  --font-size-body-m: 1.125rem; /* 18px */
+  --font-size-body-s: 1rem; /* 16px */
+  --font-size-body-xs: 0.875rem; /* 14px */
+
+  --font-size-helper: 0.75rem; /* 12px */
+  --font-size-helper-xs: 0.625rem; /* 10px */
+
+  --radius-xxs: 0.25rem; /* 4px */
+  --radius-xs: 0.5rem; /* 8px */
+  --radius-sm: 0.625rem; /* 10px */
+  --radius-md: 0.75rem; /* 12px */
+  --radius-lg: 0.875rem; /* 14px */
+  --radius-xl: 1.875rem; /* 30px */
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);

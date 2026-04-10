@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} light`} style={{ colorScheme: 'light' }}>
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils/utilities';
 const buttonVariants = cva(
   `border-box disabled:!text-greyscale-400 relative flex items-center
   justify-center font-semibold transition-all duration-300
-  disabled:pointer-events-none`,
+  outline-none disabled:pointer-events-none`,
   {
     variants: {
       variant: {

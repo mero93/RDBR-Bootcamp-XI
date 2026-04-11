@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Icon, IconPathRegistry, isIconName } from '@/components/ui/Icon';
+import RatingStar from '@/components/ui/RatingStar';
 
 export default function Home() {
   const icons = Object.keys(IconPathRegistry);
@@ -24,6 +25,10 @@ export default function Home() {
       </div>
       <div className="flex flex-wrap gap-1">
         {icons.map((icon) => isIconName(icon) && <Icon name={icon} key={icon} className={'text-greyscale-700'}></Icon>)}
+      </div>
+      <div className="flex flex-wrap gap-1">
+        <RatingStar /> <RatingStar percentage={50} className="text-greyscale-50 hover:text-gray-100" />{' '}
+        <RatingStar percentage={0} className="text-gray-300" />
       </div>
     </main>
   );

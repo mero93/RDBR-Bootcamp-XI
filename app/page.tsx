@@ -24,7 +24,7 @@ export default function Home() {
         </Button>
       </div>
       <div className="flex flex-wrap gap-1">
-        {icons.map((icon) => isIconName(icon) && <Icon name={icon} key={icon} className={'text-greyscale-700'}></Icon>)}
+        {icons.map((icon) => isIconName(icon) && <Icon name={icon} key={icon} className={'text-greyscale-300'}></Icon>)}
       </div>
       <div className="flex flex-wrap gap-1">
         <RatingStar /> <RatingStar percentage={50} className="text-greyscale-50 hover:text-gray-100" />{' '}

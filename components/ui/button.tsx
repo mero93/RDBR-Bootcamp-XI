@@ -2,50 +2,87 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { Slot } from 'radix-ui';
 import * as React from 'react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/utilities';
 
 const buttonVariants = cva(
-  "group/button focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 inline-flex shrink-0 items-center justify-center rounded-md border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:ring-3 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:ring-3 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  `border-box disabled:!text-greyscale-400 relative flex cursor-pointer
+  items-center justify-center gap-2 font-semibold transition-all
+  duration-300 outline-none disabled:pointer-events-none`,
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/80',
-        outline:
-          'border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50 shadow-xs',
-        secondary:
-          'bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground',
-        ghost:
-          'hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50',
-        destructive:
-          'bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40',
-        link: 'text-primary underline-offset-4 hover:underline',
+        primary: cn(
+          'text-greyscale-50 border-2 border-purple-500 bg-purple-500',
+          'focus:border-purple-700 focus:bg-purple-600',
+          'hover:border-purple-600 hover:bg-purple-600',
+          'active:border-purple-700 active:bg-purple-700',
+          'disabled:bg-greyscale-300 disabled:border-greyscale-300',
+          'rounded-xs px-[calc(1.5625rem-2px)] py-[calc(1rem-2px)]'
+        ),
+        outline: cn(
+          'border-2 border-purple-300 !text-purple-500',
+          'hover:!text-greyscale-50 hover:border-purple-600 hover:bg-purple-600',
+          'focus:border-purple-100 focus:bg-purple-600',
+          'focus:!text-greyscale-50 focus:border-dashed',
+          'active:!text-greyscale-50 active:border-purple-700 active:bg-purple-700',
+          'disabled:bg-greyscale-300 disabled:border-greyscale-400',
+          'rounded-xs px-[calc(1rem-2px)] py-[calc(1rem-2px)]'
+        ),
+        ghost: cn(
+          'border-b-2 border-purple-500 !text-purple-500',
+          'hover:border-purple-600 hover:!text-purple-600',
+          'active:border-purple-700 active:!text-purple-700',
+          'focus:border-dashed focus:border-purple-700 focus:!text-purple-700',
+          'disabled:!text-greyscale-300 disabled:border-greyscale-300',
+          'p-4 pb-[calc(1rem-2px)]'
+        ),
+        icon: cn(
+          '!text-greyscale-50 border-2 border-purple-500 bg-purple-500',
+          'focus:border-purple-700 focus:bg-purple-600',
+          'hover:border-purple-600 hover:bg-purple-600',
+          'active:border-purple-700 active:bg-purple-700',
+          'disabled:bg-greyscale-300 disabled:border-greyscale-300'
+        ),
+        nav: cn(
+          '!text-greyscale-600',
+          'hover:!text-purple-500',
+          'active:!text-purple-700',
+          'focus:!text-purple-700',
+          'disabled:!text-greyscale-300 disabled:border-greyscale-300',
+          'm-3.75'
+        ),
       },
       size: {
-        default:
-          'h-9 gap-1.5 px-2.5 in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
-        xs: "h-6 gap-1 rounded-[min(var(--radius-md),8px)] px-2 text-xs in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: 'h-8 gap-1 rounded-[min(var(--radius-md),10px)] px-2.5 in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5',
-        lg: 'h-10 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
-        icon: 'size-9',
-        'icon-xs':
-          "size-6 rounded-[min(var(--radius-md),8px)] in-data-[slot=button-group]:rounded-md [&_svg:not([class*='size-'])]:size-3",
-        'icon-sm': 'size-8 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-md',
-        'icon-lg': 'size-10',
+        medium: 'text-xl',
+        small: 'text-base',
       },
     },
+    compoundVariants: [
+      {
+        variant: 'icon',
+        size: 'medium',
+        class: 'h-15 w-15 rounded-lg',
+      },
+      {
+        variant: 'icon',
+        size: 'small',
+        class: 'h-11.25 w-11.25 rounded-sm',
+      },
+    ],
     defaultVariants: {
-      variant: 'default',
-      size: 'default',
+      variant: 'primary',
+      size: 'medium',
     },
   }
 );
 
 function Button({
   className,
-  variant = 'default',
-  size = 'default',
+  type = 'button',
+  variant = 'primary',
+  size = 'medium',
   asChild = false,
-  ...props
+  ...properties
 }: React.ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
@@ -57,8 +94,9 @@ function Button({
       data-slot="button"
       data-variant={variant}
       data-size={size}
+      type={asChild ? undefined : type}
       className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
+      {...properties}
     />
   );
 }

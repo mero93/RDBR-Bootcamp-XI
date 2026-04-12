@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils/utilities';
 
 const buttonVariants = cva(
   `border-box disabled:!text-greyscale-400 relative flex items-center
-  justify-center font-semibold transition-all duration-300
+  justify-center gap-2 font-semibold transition-all duration-300
   outline-none disabled:pointer-events-none`,
   {
     variants: {
@@ -17,7 +17,7 @@ const buttonVariants = cva(
           'hover:border-purple-600 hover:bg-purple-600',
           'active:border-purple-700 active:bg-purple-700',
           'disabled:bg-greyscale-300 disabled:border-greyscale-300',
-          'rounded-xs px-[calc(1.5625rem-2px)] py-[calc(1.0625rem-2px)]'
+          'rounded-xs px-[calc(1.5625rem-2px)] py-[calc(1rem-2px)]'
         ),
         outline: cn(
           'border-2 border-purple-300 !text-purple-500',
@@ -26,7 +26,7 @@ const buttonVariants = cva(
           'focus:!text-greyscale-50 focus:border-dashed',
           'active:!text-greyscale-50 active:border-purple-700 active:bg-purple-700',
           'disabled:bg-greyscale-300 disabled:border-greyscale-400',
-          'rounded-xs px-[calc(1rem-2px)] py-[calc(0.75rem-2px)]'
+          'rounded-xs px-[calc(1rem-2px)] py-[calc(1rem-2px)]'
         ),
         ghost: cn(
           'border-b-2 border-purple-500 !text-purple-500',
@@ -36,12 +36,39 @@ const buttonVariants = cva(
           'disabled:!text-greyscale-300 disabled:border-greyscale-300',
           'p-4 pb-[calc(1rem-2px)]'
         ),
+        icon: cn(
+          '!text-greyscale-50 border-2 border-purple-500 bg-purple-500',
+          'focus:border-purple-700 focus:bg-purple-600',
+          'hover:border-purple-600 hover:bg-purple-600',
+          'active:border-purple-700 active:bg-purple-700',
+          'disabled:bg-greyscale-300 disabled:border-greyscale-300'
+        ),
+        nav: cn(
+          '!text-greyscale-600',
+          'hover:!text-purple-500',
+          'active:!text-purple-700',
+          'focus:!text-purple-700',
+          'disabled:!text-greyscale-300 disabled:border-greyscale-300',
+          'p-3.75'
+        ),
       },
       size: {
-        medium: 'text-body-l',
-        small: 'text-body-s',
+        medium: 'text-xl',
+        small: 'text-base',
       },
     },
+    compoundVariants: [
+      {
+        variant: 'icon',
+        size: 'medium',
+        class: 'h-15 w-15 rounded-lg',
+      },
+      {
+        variant: 'icon',
+        size: 'small',
+        class: 'h-11.25 w-11.25 rounded-sm',
+      },
+    ],
     defaultVariants: {
       variant: 'primary',
       size: 'medium',

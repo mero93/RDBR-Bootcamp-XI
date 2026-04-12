@@ -3,6 +3,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
+import Header from '@/components/Header';
+
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
@@ -21,7 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} light`} style={{ colorScheme: 'light' }}>
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="bg-greyscale-100 flex min-h-full flex-col">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

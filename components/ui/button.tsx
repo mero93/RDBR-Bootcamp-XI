@@ -49,7 +49,7 @@ const buttonVariants = cva(
           'active:!text-purple-700',
           'focus:!text-purple-700',
           'disabled:!text-greyscale-300 disabled:border-greyscale-300',
-          'm-3.75'
+          'mx-3.75'
         ),
       },
       size: {

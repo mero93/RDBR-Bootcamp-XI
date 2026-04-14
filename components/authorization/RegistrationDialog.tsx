@@ -1,5 +1,5 @@
 import { ChevronLeft, RefreshCcwDot } from 'lucide-react';
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 import { useModalStates } from '@/providers/ModalProvider';
 import { RegisterForm, RegisterStep1Schema } from '@/types/authorization-schemas';
@@ -36,9 +36,17 @@ export default function RegistrationDialog({ open, onOpenChange }: RegistrationD
   const [step2Valid, setStep2Valid] = useState<boolean | undefined>();
   const [step3Valid, setStep3Valid] = useState<boolean | undefined>();
   const validSteps = [step1Valid, step2Valid, step3Valid];
-
   const isFormValid =
     (step === 1 && step1Valid === true) || (step === 2 && step2Valid === true) || validSteps.every(Boolean) || true;
+
+  // Animate Stepper
+  const [height, setHeight] = useState<number | undefined>();
+  const contentReference = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    if (contentReference.current) {
+      setHeight(contentReference.current.offsetHeight);
+    }
+  }, [step]);
 
   const handleSubmit = async (data: SchemaData) => {
     const parsed = RegisterStep1Schema.safeParse(data);
@@ -142,7 +150,17 @@ export default function RegistrationDialog({ open, onOpenChange }: RegistrationD
   ];
 
   const renderStep = (step: number) => {
-    return forms[step - 1];
+    return (
+      <div
+        style={{
+          height: height == undefined ? 'auto' : `calc(${height}px + 2.25rem)`,
+          transition: 'height 0.3s ease-in-out',
+        }}
+        className="relative w-full overflow-hidden"
+      >
+        <div ref={contentReference}>{forms[step - 1]}</div>
+      </div>
+    );
   };
 
   return (
@@ -156,7 +174,7 @@ export default function RegistrationDialog({ open, onOpenChange }: RegistrationD
           <DialogTitle>
             <Heading variant="h2">Create Account</Heading>
           </DialogTitle>
-          <DialogDescription className="text-sm">Join and start learning today</DialogDescription>
+          <DialogDescription className="mb-4 text-sm">Join and start learning today</DialogDescription>
           <Stepper
             validSteps={validSteps}
             totalSteps={3}

@@ -5,8 +5,18 @@ const avatarMaxSize = 2 * 1024 * 1024;
 const fullNameRegex = /^[a-zA-Z ]+$/;
 const mobileRegex = /^5[0-9]{2} ?[0-9]{3} ?[0-9]{3}$/;
 
-export const RegisterStep1Schema = z.object({
+const _RegisterStep1Schema = z.object({
   email: z.email(),
+  forbiddenEmails: z.array(z.string().nullish()).default([]).optional(),
+});
+export const RegisterStep1Schema = _RegisterStep1Schema.superRefine(({ email, forbiddenEmails }, context) => {
+  if (forbiddenEmails && forbiddenEmails.includes(email)) {
+    context.addIssue({
+      message: 'Email is already in use',
+      path: ['email'],
+      code: 'custom',
+    });
+  }
 });
 export type RegisterStep1 = z.infer<typeof RegisterStep1Schema>;
 
@@ -14,7 +24,6 @@ const _RegisterStep2Schema = z.object({
   password: z.string().min(3, 'Password too short'),
   confirmPassword: z.string(),
 });
-
 export const RegisterStep2Schema = _RegisterStep2Schema.superRefine(({ confirmPassword, password }, context) => {
   if (confirmPassword !== password) {
     context.addIssue({
@@ -26,8 +35,9 @@ export const RegisterStep2Schema = _RegisterStep2Schema.superRefine(({ confirmPa
 });
 export type RegisterStep2 = z.infer<typeof RegisterStep2Schema>;
 
-export const RegisterStep3Schema = z.object({
+const _RegisterStep3Schema = z.object({
   username: z.string().min(3, 'Username too short'),
+  forbiddenUsernames: z.array(z.string().nullish()).default([]).optional(),
   avatar: z
     .instanceof(File)
     .refine((file) => avatarAllowedTypes.has(file.type), {
@@ -38,12 +48,27 @@ export const RegisterStep3Schema = z.object({
     })
     .nullish(),
 });
+export const RegisterStep3Schema = _RegisterStep3Schema.superRefine(({ username, forbiddenUsernames }, context) => {
+  if (forbiddenUsernames && forbiddenUsernames.includes(username)) {
+    context.addIssue({
+      message: 'USername is already in use',
+      path: ['username'],
+      code: 'custom',
+    });
+  }
+});
 export type RegisterStep3 = z.infer<typeof RegisterStep3Schema>;
 
-export function MapRegisterFormToServer(step1: RegisterStep1, step2: RegisterStep2, step3: RegisterStep3) {
-  const merged = { ...step1, ...step2, ...step3 };
+export const RegisterFormSchema = RegisterStep1Schema.and(RegisterStep2Schema).and(RegisterStep3Schema);
+export type RegisterForm = z.infer<typeof RegisterFormSchema>;
 
-  return mapToSnakeCase(merged);
+export function MapRegisterFormToServer(form: RegisterForm) {
+  const payload = { ...form };
+
+  delete payload.forbiddenEmails;
+  delete payload.forbiddenUsernames;
+
+  return mapToSnakeCase(payload);
 }
 
 export const LoginFormSchema = z.object({

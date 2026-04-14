@@ -43,8 +43,15 @@ const buttonVariants = cva(
           'active:border-purple-700 active:bg-purple-700',
           'disabled:bg-greyscale-300 disabled:border-greyscale-300'
         ),
+        simpleIcon: cn(
+          '!text-greyscale-400',
+          'focus:text-purple-500',
+          'hover:text-purple-500',
+          'active:text-purple-600',
+          'disabled:bg-greyscale-300'
+        ),
         nav: cn(
-          '!text-greyscale-600',
+          'text-greyscale-600',
           'hover:!text-purple-500',
           'active:!text-purple-700',
           'focus:!text-purple-700',

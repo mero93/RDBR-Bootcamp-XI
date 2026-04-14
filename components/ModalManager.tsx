@@ -35,27 +35,25 @@ export default function ModalManager({ setIsTransitioning, activeKey }: ModalMan
     (async () => {
       guard.current = true;
       if (currentKey === activeKey) return;
-      console.log('currentKey', currentKey, 'activeKey', activeKey);
 
       setIsTransitioning(true);
 
       if (currentKey !== undefined && isVisible) {
         setIsVisible(false);
 
-        console.log('should pause');
         await new Promise<void>((resolve) =>
           setTimeout(() => {
-            console.log('pause lifted');
             resolve();
           }, transitionDuration)
         );
       }
 
-      console.log('opening new modal');
       setCurrentKey(activeKey);
+
       if (activeKey !== undefined) {
         setIsVisible(true);
       }
+      console.log('setting modal to', activeKey);
 
       setIsTransitioning(false);
     })().finally(() => (guard.current = false));
